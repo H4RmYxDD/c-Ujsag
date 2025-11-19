@@ -3,36 +3,23 @@ import type { Author } from "../types/Author";
 import { Button } from "react-bootstrap";
 import apiClient from "../api/apiClient";
 import { toast } from "react-toastify";
-import "./MainPage.css";
 
-const LoginPage = () => {
+const RegisterPage = () => {
   const [author, setAuthor] = useState<Author>({
     email: "",
     password: "",
   });
-  function login() {
-    apiClient
-      .post("/authors")
-      .then((res) => {
-        switch (res.status) {
-          case 200:
-            toast.success("Sikeres belépés");
-            break;
-          case 400:
-            toast.error("Bad request");
-            break;
-          case 401:
-            toast.error("Még nincs regisztrálva az oldalon");
-            break;
-          case 404:
-            toast.error("Sajnáljuk, de a kért oldal nem érhető el jelenleg");
-            break;
-          default:
-            toast.error("Valami hiba történt");
-            break;
-        }
-      })
-      .catch((reason) => toast.error(reason));
+  function register() {
+    apiClient.post("/authors").then((res) => {
+      switch (res.status) {
+        case 201:
+          toast.success("Sikeres regisztráció");
+          break;
+        case 401:
+          toast.error("Bad request");
+          break;
+      }
+    });
   }
   return (
     <>
@@ -49,9 +36,10 @@ const LoginPage = () => {
           onChange={(e) => setAuthor({ ...author, password: e.target.value })}
         />
 
-        <Button onClick={login} className="btn-primary">
+        <Button onClick={register} className="btn-primary">
           Bejelentkezés
         </Button>
+
         <h5>
           Még nincs fiókod?{" "}
           <Button variant="link" href="/register">
@@ -63,4 +51,4 @@ const LoginPage = () => {
   );
 };
 
-export default LoginPage;
+export default RegisterPage;
