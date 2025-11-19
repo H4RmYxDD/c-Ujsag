@@ -10,7 +10,7 @@ const RegisterPage = () => {
     password: "",
   });
   function register() {
-    apiClient.post("/authors").then((res) => {
+    apiClient.post("/authors", author).then((res) => {
       switch (res.status) {
         case 201:
           toast.success("Sikeres regisztráció");
@@ -37,13 +37,13 @@ const RegisterPage = () => {
         />
 
         <Button onClick={register} className="btn-primary">
-          Bejelentkezés
+          Regisztráció
         </Button>
 
         <h5>
-          Még nincs fiókod?{" "}
-          <Button variant="link" href="/register">
-            Regisztráció
+          Már van fiókod?{" "}
+          <Button variant="link" href="/login">
+            Bejelentkezés
           </Button>
         </h5>
       </div>
