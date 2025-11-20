@@ -1,4 +1,4 @@
-﻿namespace Article
+﻿namespace ArticleMaui
 {
     public partial class AppShell : Shell
     {
