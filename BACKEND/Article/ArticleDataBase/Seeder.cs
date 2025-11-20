@@ -20,7 +20,7 @@ namespace ArticleDataBase
         {
             if (!_db.Articles.Any())
             {
-                var todos = new[]
+                var articles = new[]
                 {
                     new Article
                     {
@@ -34,9 +34,31 @@ namespace ArticleDataBase
                     }
                 };
 
-                _db.Articles.AddRange(todos);
+                _db.Articles.AddRange(articles);
                 await _db.SaveChangesAsync();
             }
+            if (!_db.Authors.Any())
+            {
+                var authors = new[]
+                {
+                    new Author
+                    {
+                        Name = "pisti",
+                        IsAdmin = false,
+                    },
+                    new Author
+                    {
+                        Name = "admin",
+                        IsAdmin = true,
+                    }
+                };
+
+                _db.Authors.AddRange(authors);
+                await _db.SaveChangesAsync();
+            }
+
+
         }
+
     }
 }

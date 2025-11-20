@@ -15,7 +15,7 @@ var connectionString = builder.Configuration.GetConnectionString("ArticleDbConte
 builder.Services.AddDbContext<ArticleDbContext>(options =>
   options.UseSqlServer(connectionString));
 
-builder.Services.AddTransient<IArticleService, ArticleService>();
+builder.Services.AddTransient<IService, Service>();
 builder.Services.AddHttpClient();
 builder.Services.AddIdentityApiEndpoints<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = false).AddRoles<IdentityRole>().AddEntityFrameworkStores<ArticleDbContext>();
 builder.Services.AddAuthorization();
@@ -56,31 +56,39 @@ app.UseCors(allowSpecificOrigins);
 
 app.MapGroup("Account").WithTags("Account").MapIdentityApi<IdentityUser>();
 
-app.MapGet("get/{id:int}", async (int id, IArticleService service) =>
+app.MapGet("get/{id:int}", async (int id, IService service) =>
 {
     return await service.GetArticleAsync(id);
 }).RequireAuthorization();
 
-app.MapGet("list", async (IArticleService service) =>
+app.MapGet("list", async (IService service) =>
 {
     return await service.ListAllArticleAsync();
 }).RequireAuthorization();
 
-app.MapPost("create", async (Article model, IArticleService service) =>
+app.MapPost("createArticle", async (Article model, IService service) =>
 {
     await service.CreateArticleAsync(model);
 
     return Results.Created();
 }).RequireAuthorization();
 
-app.MapPut("update", async (Article model, IArticleService service) =>
+app.MapPost("createAuthor", async (Author model, IService service) =>
+{
+    await service.CreateAuthorAsync(model);
+
+    return Results.Created();
+}).RequireAuthorization();
+
+
+app.MapPut("update", async (Article model, IService service) =>
 {
     await service.UpdateArticleAsync(model);
 
     return Results.Ok();
 }).RequireAuthorization();
 
-app.MapDelete("delete/{id:int}", async (int id, IArticleService service) =>
+app.MapDelete("delete/{id:int}", async (int id, IService service) =>
 {
     await service.DeleteArticleAsync(id);
 

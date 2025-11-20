@@ -9,7 +9,7 @@ using ArticleDataBase;
 
 namespace ArticleServices
 {
-    public interface IArticleService
+    public interface IService
     {
         Task CreateArticleAsync(Article entity);
         Task CreateAuthorAsync (Author author);

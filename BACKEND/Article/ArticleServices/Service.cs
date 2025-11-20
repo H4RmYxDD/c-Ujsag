@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace ArticleServices;
 
-public class ArticleService(ArticleDbContext db) : IArticleService
+public class Service(ArticleDbContext db) : IService
 {
     public async Task CreateArticleAsync(Article entity)
     {
