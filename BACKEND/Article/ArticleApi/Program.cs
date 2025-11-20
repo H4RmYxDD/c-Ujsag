@@ -52,7 +52,7 @@ if (app.Environment.IsDevelopment())
 
 
 app.UseHttpsRedirection();
-app.UseCors(allowSpecificOrigins);
+app.UseCors(allowSpecificOrigins);  
 
 app.MapGroup("Account").WithTags("Account").MapIdentityApi<IdentityUser>();
 

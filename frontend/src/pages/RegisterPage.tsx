@@ -10,12 +10,12 @@ const RegisterPage = () => {
     password: "",
   });
   function register() {
-    apiClient.post("/Accounts/register", author).then((res) => {
+    apiClient.post("/Account/register", author).then((res) => {
       switch (res.status) {
         case 201:
           toast.success("Sikeres regisztráció");
           break;
-        case 401:
+        case 400:
           toast.error("Bad request");
           break;
       }
@@ -42,7 +42,7 @@ const RegisterPage = () => {
 
         <h5>
           Már van fiókod?{" "}
-          <Button variant="link" href="/login   ">
+          <Button variant="link" href="/   ">
             Bejelentkezés
           </Button>
         </h5>

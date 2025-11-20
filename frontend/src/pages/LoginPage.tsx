@@ -4,19 +4,23 @@ import { Button } from "react-bootstrap";
 import apiClient from "../api/apiClient";
 import { toast } from "react-toastify";
 import "./MainPage.css";
+import { useNavigate } from "react-router-dom";
 
 const LoginPage = () => {
+  const nav = useNavigate();
   const [author, setAuthor] = useState<Author>({
     email: "",
     password: "",
   });
   function login() {
     apiClient
-      .post("/Accounts/login")
+      .post("/Account/login", author)
       .then((res) => {
         switch (res.status) {
           case 200:
             toast.success("Sikeres belépés");
+            localStorage.setItem("token", res.data.accessToken);
+            nav("/main");
             break;
           case 400:
             toast.error("Bad request");
