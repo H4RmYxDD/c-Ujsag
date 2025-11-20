@@ -12,6 +12,7 @@ namespace ArticleServices
     public interface IArticleService
     {
         Task CreateArticleAsync(Article entity);
+        Task CreateAuthorAsync (Author author);
         Task<ArticleDto> GetArticleAsync(int id);
         Task<List<ArticleDto>> ListAllArticleAsync();
         Task DeleteArticleAsync(int id);

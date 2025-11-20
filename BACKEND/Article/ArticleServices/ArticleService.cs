@@ -12,6 +12,12 @@ public class ArticleService(ArticleDbContext db) : IArticleService
         await db.SaveChangesAsync();
     }
 
+    public async Task CreateAuthorAsync(Author entity)
+    {
+        db.Authors.Add(entity);
+        await db.SaveChangesAsync();
+    }
+
     public async Task<ArticleDto> GetArticleAsync(int id)
     {
         var entity = await db.Articles.FirstOrDefaultAsync(e => e.Id == id);
