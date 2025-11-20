@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,7 +7,12 @@ using System.Threading.Tasks;
 
 namespace ArticleDataBase
 {
-    internal class ArticleAuthor
+    [PrimaryKey(nameof(AuthorId), nameof(ArticleId))]
+    public class ArticleAuthor
     {
+        public int AuthorId { get; set; }
+        public int ArticleId { get; set; }
+        public Author Author { get; set; }
+        public Article Article { get; set; }
     }
 }
