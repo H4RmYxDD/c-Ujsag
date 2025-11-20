@@ -10,7 +10,7 @@ const RegisterPage = () => {
     password: "",
   });
   function register() {
-    apiClient.post("/authors", author).then((res) => {
+    apiClient.post("/Accounts/register", author).then((res) => {
       switch (res.status) {
         case 201:
           toast.success("Sikeres regisztráció");
