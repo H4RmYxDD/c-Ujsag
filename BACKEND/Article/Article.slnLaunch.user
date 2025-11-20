@@ -1,0 +1,27 @@
+[
+  {
+    "Name": "New Profile",
+    "Projects": [
+      {
+        "Path": "Article\\ArticleMaui.csproj",
+        "Action": "Start"
+      },
+      {
+        "Path": "ArticleApi\\ArticleApi.csproj",
+        "Action": "Start"
+      },
+      {
+        "Path": "ArticleDataBase\\ArticleDataBase.csproj",
+        "Action": "Start"
+      },
+      {
+        "Path": "ArticleServices\\ArticleServices.csproj",
+        "Action": "Start"
+      },
+      {
+        "Path": "Common\\Common.csproj",
+        "Action": "Start"
+      }
+    ]
+  }
+]
