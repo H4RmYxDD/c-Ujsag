@@ -12,7 +12,7 @@ const LoginPage = () => {
   });
   function login() {
     apiClient
-      .post("/authors")
+      .post("/Accounts/login")
       .then((res) => {
         switch (res.status) {
           case 200:
