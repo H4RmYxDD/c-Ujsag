@@ -1,6 +1,6 @@
 @ArticleApi_HostAddress = http://localhost:5038
 
-GET {{ArticleApi_HostAddress}}/weatherforecast/
+GET {{ArticleApi_HostAddress}}/list
 Accept: application/json
 
 ###

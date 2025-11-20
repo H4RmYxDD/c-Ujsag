@@ -16,3 +16,8 @@ BACKEND/Article/ArticleServices/obj
 BACKEND/Article/Common/obj
 BACKEND/Article/.vs
 BACKEND/.vs
+BACKEND/Article/Article/bin
+BACKEND/Article/ArticleApi/bin
+BACKEND/Article/ArticleDataBase/bin
+BACKEND/Article/ArticleServices/bin
+BACKEND/Article/Common/bin
