@@ -42,7 +42,7 @@ const RegisterPage = () => {
 
         <h5>
           Már van fiókod?{" "}
-          <Button variant="link" href="/login">
+          <Button variant="link" href="/login   ">
             Bejelentkezés
           </Button>
         </h5>
