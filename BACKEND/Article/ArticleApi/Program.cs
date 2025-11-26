@@ -25,16 +25,18 @@ builder.Services.AddAuthorizationBuilder()
     .AddPolicy("user", policy => policy.RequireRole("user"));
 
 var allowSpecificOrigins = "_allowSpecificOrigins";
+
 builder.Services.AddCors(options =>
 {
-    options.AddPolicy(allowSpecificOrigins,
-        policy =>
-        {
-            policy.WithOrigins("*")
-                  .AllowAnyHeader()
-                  .AllowAnyMethod();
-        });
+    options.AddPolicy(allowSpecificOrigins, policy =>
+    {
+        policy.WithOrigins("*")
+              .AllowAnyHeader()
+              .AllowAnyMethod();
+    });
 });
+
+
 var app = builder.Build();
 using (var scope = app.Services.CreateScope())
 {
@@ -50,11 +52,15 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUi();
 }
 
-
 app.UseHttpsRedirection();
-app.UseCors(allowSpecificOrigins);  
+
+app.UseCors(allowSpecificOrigins);
+
+app.UseAuthentication();
+app.UseAuthorization();
 
 app.MapGroup("Account").WithTags("Account").MapIdentityApi<IdentityUser>();
+
 
 app.MapGet("get/{id:int}", async (int id, IService service) =>
 {
