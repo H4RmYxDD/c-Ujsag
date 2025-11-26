@@ -2,6 +2,7 @@
 using Windows.Services.Maps;
 using ArticleServices;
 using ArticleDataBase;
+using Microsoft.EntityFrameworkCore;
 
 namespace ArticleMaui
 {

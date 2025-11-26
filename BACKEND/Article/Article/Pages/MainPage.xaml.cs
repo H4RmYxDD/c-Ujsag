@@ -1,4 +1,5 @@
 ﻿namespace ArticleMaui.Pages;
+using ArticleMaui.Pages;
 using ArticleServices;
 using Common;
 
@@ -29,13 +30,13 @@ public partial class MainPage : ContentPage
         await Navigation.PushAsync(new AddArticlePage(_Service));
     }
 
-    private async void OnEditArticleClicked(object sender, EventArgs e)
-    {
-        if (sender is Button button && button.CommandParameter is ArticleDto article)
-        {
-            await Navigation.PushAsync(new EditArticlePage(_Service, article.Id));
-        }
-    }
+    //private async void OnEditArticleClicked(object sender, EventArgs e)
+    //{
+    //    if (sender is Button button && button.CommandParameter is ArticleDto article)
+    //    {
+    //        await Navigation.PushAsync(new EditArticlePage(_Service, article.Id));
+    //    }
+    //}
 
     private async void OnDeleteArticleClicked(object sender, EventArgs e)
     {
