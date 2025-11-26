@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ArticleDataBase
 {
-    public class Article
+    public class ArticleModel
     {
         public int Id { get; set; }
         public string Title {  get; set; }

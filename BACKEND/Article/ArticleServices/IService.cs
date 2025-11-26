@@ -11,11 +11,11 @@ namespace ArticleServices
 {
     public interface IService
     {
-        Task CreateArticleAsync(Article entity);
+        Task CreateArticleAsync(ArticleModel entity);
         Task CreateAuthorAsync (Author author);
         Task<ArticleDto> GetArticleAsync(int id);
         Task<List<ArticleDto>> ListAllArticleAsync();
         Task DeleteArticleAsync(int id);
-        Task UpdateArticleAsync(Article model);
+        Task UpdateArticleAsync(ArticleModel model);
     }
 }

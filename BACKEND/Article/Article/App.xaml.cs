@@ -1,4 +1,6 @@
-﻿namespace ArticleMaui
+﻿using ArticleMaui.Pages;
+
+namespace Article.WinUI
 {
     public partial class App : Application
     {
@@ -6,11 +8,10 @@
         {
             InitializeComponent();
 
-            Routing.RegisterRoute(nameof(Pages.LoginPage), typeof(Pages.LoginPage));
-            Routing.RegisterRoute(nameof(Pages.RegisterPage), typeof(Pages.RegisterPage));
-            Routing.RegisterRoute(nameof(Pages.MainPage), typeof(Pages.MainPage));
-
-            MainPage = new AppShell();
+            Routing.RegisterRoute(nameof(ArticleMaui.Pages.LoginPage), typeof(ArticleMaui.Pages.LoginPage));
+            Routing.RegisterRoute(nameof(ArticleMaui.Pages.RegisterPage), typeof(ArticleMaui.Pages.RegisterPage));
+            Routing.RegisterRoute(nameof(ArticleMaui.Pages.MainPage), typeof(ArticleMaui.Pages.MainPage));
+            AppShell MainPage = new AppShell();
         }
 
         protected override Window CreateWindow(IActivationState? activationState)

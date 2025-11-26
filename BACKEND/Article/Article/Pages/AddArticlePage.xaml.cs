@@ -21,7 +21,7 @@ public partial class AddArticlePage : ContentPage
             return;
         }
 
-        var article = new Article
+        var article = new ArticleModel
         {
             Title = TitleEntry.Text,
             Content = ContentEntry.Text,

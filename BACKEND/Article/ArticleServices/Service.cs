@@ -6,7 +6,7 @@ namespace ArticleServices;
 
 public class Service(ArticleDbContext db) : IService
 {
-    public async Task CreateArticleAsync(Article entity)
+    public async Task CreateArticleAsync(ArticleModel entity)
     {
         db.Articles.Add(entity);
         await db.SaveChangesAsync();
@@ -51,7 +51,7 @@ public class Service(ArticleDbContext db) : IService
     }
 
 
-    public async Task UpdateArticleAsync(Article model)
+    public async Task UpdateArticleAsync(ArticleModel model)
     {
         await db.Articles.Where(e => e.Id == model.Id).ExecuteUpdateAsync(
             setters =>

@@ -3,6 +3,8 @@ using Windows.Services.Maps;
 using ArticleServices;
 using ArticleDataBase;
 using Microsoft.EntityFrameworkCore;
+using Article;
+using ArticleMaui.Pages;
 
 namespace ArticleMaui
 {

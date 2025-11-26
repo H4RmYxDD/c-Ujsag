@@ -22,12 +22,12 @@ namespace ArticleDataBase
             {
                 var articles = new[]
                 {
-                    new Article
+                    new ArticleModel
                     {
                         Title = "elso ujsag",
                         Content = "elso ujsag tartalma"
                     },
-                    new Article
+                    new ArticleModel
                     {
                         Title = "masodik ujsag",
                         Content = "masodik ujsag tartalma"

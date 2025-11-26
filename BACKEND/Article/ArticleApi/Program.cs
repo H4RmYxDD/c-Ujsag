@@ -72,7 +72,7 @@ app.MapGet("list", async (IService service) =>
     return await service.ListAllArticleAsync();
 }).RequireAuthorization();
 
-app.MapPost("createArticle", async (Article model, IService service) =>
+app.MapPost("createArticle", async (ArticleModel model, IService service) =>
 {
     await service.CreateArticleAsync(model);
 
@@ -87,7 +87,7 @@ app.MapPost("createAuthor", async (Author model, IService service) =>
 }).RequireAuthorization();
 
 
-app.MapPut("update", async (Article model, IService service) =>
+app.MapPut("update", async (ArticleModel model, IService service) =>
 {
     await service.UpdateArticleAsync(model);
 

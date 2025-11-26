@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="ArticleMaui.MainPage"
+             x:Class="ArticleMaui.Pages.MainPage"
              Title="Ujsagok">
 
     <Grid RowDefinitions="Auto,*" Padding="15" RowSpacing="10">
@@ -18,17 +18,15 @@
             BackgroundColor="#0078D7"
             TextColor="White"
             CornerRadius="8"
-            HeightRequest="40"
-            HorizontalOptions="StartAndExpand" />
+            HeightRequest="40" />
         </HorizontalStackLayout>
 
         <CollectionView 
-        x:Name="ArticlesCollectionView" 
+        x:Name="ArticleCollectionView"
         Grid.Row="1"
         SelectionMode="None"
         VerticalScrollBarVisibility="Always"
-        Margin="0,5"
-        VerticalOptions="FillAndExpand">
+        Margin="0,5">
 
             <CollectionView.ItemsLayout>
                 <GridItemsLayout 

@@ -11,6 +11,6 @@ namespace ArticleDataBase
         public int Id { get; set; }
         public string Name { get; set; }
         public bool IsAdmin { get; set; }
-        public List<Article> Articles { get; set; } = new List<Article>();
+        public List<ArticleModel> Articles { get; set; } = new List<ArticleModel>();
     }
 }
