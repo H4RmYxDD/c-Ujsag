@@ -3,7 +3,7 @@ import type { Author } from "../types/Author";
 import { Button } from "react-bootstrap";
 import apiClient from "../api/apiClient";
 import { toast } from "react-toastify";
-import "./MainPage.css";
+import "../design/LoginPage.css";
 import { useNavigate } from "react-router-dom";
 
 const LoginPage = () => {

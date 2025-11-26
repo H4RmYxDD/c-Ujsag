@@ -4,6 +4,7 @@ import apiClient from "../api/apiClient";
 import { toast } from "react-toastify";
 import { Col, Card, Button, Container, Row } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
+import "../design/MainPage.css";
 
 const MainPage = () => {
   const [articles, setArticles] = useState<Array<Article>>([]);
