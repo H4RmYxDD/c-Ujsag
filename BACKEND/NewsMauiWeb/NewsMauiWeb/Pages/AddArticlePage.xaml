@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="NewsApp.Pages.AddArticlePage"
+             Title="AddArticlePage">
+    <ScrollView>
+        <VerticalStackLayout Padding="20" Spacing="10">
+
+            <Entry x:Name="TitleEntry" Placeholder="Cím" />
+            <Entry x:Name="ContentEntry" Placeholder="Tartalom" />
+
+            <Button 
+                Text="Mentés"
+                Clicked="OnSaveClicked"
+                BackgroundColor="#0078D7"
+                TextColor="White" />
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

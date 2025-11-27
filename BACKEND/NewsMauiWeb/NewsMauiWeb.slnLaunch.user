@@ -1,0 +1,15 @@
+[
+  {
+    "Name": "New Profile",
+    "Projects": [
+      {
+        "Path": "NewsMauiWeb\\NewsApp.csproj",
+        "Action": "Start"
+      },
+      {
+        "Path": "NewsApi\\NewsApi.csproj",
+        "Action": "Start"
+      }
+    ]
+  }
+]

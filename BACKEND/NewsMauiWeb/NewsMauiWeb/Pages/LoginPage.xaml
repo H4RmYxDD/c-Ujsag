@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="NewsApp.Pages.LoginPage"
+             Title="Bejelentkezés">
+
+    <VerticalStackLayout Padding="30" Spacing="20">
+
+        <Label Text="Bejelentkezés"
+               FontSize="28"
+               FontAttributes="Bold"
+               HorizontalOptions="Center" />
+
+        <Entry x:Name="EmailEntry"
+               Placeholder="Email cím"
+               Keyboard="Email" />
+
+        <Entry x:Name="PasswordEntry"
+               Placeholder="Jelszó"
+               IsPassword="True" />
+
+        <Button Text="Bejelentkezés"
+                Clicked="OnLoginClicked"
+                BackgroundColor="Green"
+                TextColor="White"
+                CornerRadius="12" />
+
+        <Button Text="Regisztráció"
+                Clicked="OnRegisterClicked"
+                BackgroundColor="Gray"
+                TextColor="White"
+                CornerRadius="12" />
+
+        <Label x:Name="StatusLabel"
+               Text=""
+               TextColor="Red"
+               HorizontalOptions="Center" />
+    </VerticalStackLayout>
+
+</ContentPage>
