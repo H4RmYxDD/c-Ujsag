@@ -1,16 +1,16 @@
 using NewsDataBase;
-using NewsServices;
+using System.Net.Http.Json;
 
 namespace NewsApp.Pages;
 
 public partial class AddArticlePage : ContentPage
 {
-    private readonly IService _Service;
+    private readonly HttpClient _httpClient;
 
-    public AddArticlePage(IService Service)
+    public AddArticlePage(HttpClient httpClient)
     {
         InitializeComponent();
-        _Service = Service;
+        _httpClient = httpClient;
     }
 
     private async void OnSaveClicked(object sender, EventArgs e)
@@ -23,13 +23,27 @@ public partial class AddArticlePage : ContentPage
 
         var article = new Article
         {
-            Title = TitleEntry.Text,
-            Content = ContentEntry.Text,
+            Title = TitleEntry.Text.Trim(),
+            Content = ContentEntry.Text.Trim()
         };
 
-        await _Service.CreateArticleAsync(article);
+        try
+        {
+            var response = await _httpClient.PostAsJsonAsync("createArticle", article);
 
-        await DisplayAlert("Siker", "Az újság hozzáadva!", "OK");
-        await Navigation.PopAsync();
+            if (response.IsSuccessStatusCode)
+            {
+                await DisplayAlert("Siker", "Az újság hozzáadva!", "OK");
+                await Navigation.PopAsync();
+            }
+            else
+            {
+                await DisplayAlert("Hiba", "Nem sikerült hozzáadni az újságot!", "OK");
+            }
+        }
+        catch (Exception ex)
+        {
+            await DisplayAlert("Hiba", $"Hiba történt: {ex.Message}", "OK");
+        }
     }
 }

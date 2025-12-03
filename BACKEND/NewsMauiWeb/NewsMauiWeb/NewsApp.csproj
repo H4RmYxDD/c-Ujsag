@@ -68,6 +68,7 @@
 
 	<ItemGroup>
 	  <ProjectReference Include="..\Common\Common.csproj" />
+	  <ProjectReference Include="..\NewsApi\NewsApi.csproj" />
 	  <ProjectReference Include="..\NewsDataBase\NewsDataBase.csproj" />
 	  <ProjectReference Include="..\NewsServices\NewsServices.csproj" />
 	</ItemGroup>

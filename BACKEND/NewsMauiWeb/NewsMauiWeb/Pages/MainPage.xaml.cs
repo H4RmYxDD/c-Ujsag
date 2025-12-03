@@ -1,21 +1,43 @@
-namespace NewsApp.Pages;
-using NewsServices;
 using Common;
+using System.Net.Http.Headers;
 using System.Net.Http.Json;
-using NewsDataBase;
+
+namespace NewsApp.Pages;
 
 public partial class MainPage : ContentPage
 {
-    private readonly IService _Service;
     private readonly HttpClient _httpClient;
-    public MainPage(IService Service)
+
+    public MainPage()
     {
         InitializeComponent();
+
         _httpClient = new HttpClient
         {
-            BaseAddress = new Uri("http://localhost:5038/") // Backend címed
+            BaseAddress = new Uri("http://localhost:5038/")
         };
+
+        LoadTokenAsync();
     }
+
+    private async void LoadTokenAsync()
+    {
+        var token = await SecureStorage.GetAsync("auth_token");
+
+        if (!string.IsNullOrEmpty(token))
+        {
+            // token tisztítása
+            token = token.Trim();
+            token = token.Replace("\r", "").Replace("\n", "");
+
+            if (!string.IsNullOrWhiteSpace(token))
+            {
+                _httpClient.DefaultRequestHeaders.Authorization =
+                    new AuthenticationHeaderValue("Bearer", token);
+            }
+        }
+    }
+
 
     protected override async void OnAppearing()
     {
@@ -25,45 +47,52 @@ public partial class MainPage : ContentPage
 
     private async Task LoadArticlesAsync()
     {
-
-        var articles = await _httpClient.GetFromJsonAsync<List<ArticleDto>>("/list");
-        ArticleCollectionView.ItemsSource = articles;
+        try
+        {
+            var articles = await _httpClient.GetFromJsonAsync<List<ArticleDto>>("list");
+            ArticleCollectionView.ItemsSource = articles;
+        }
+        catch (Exception ex)
+        {
+            await DisplayAlert("Hiba", ex.Message, "OK");
+        }
     }
 
     private async void OnAddArticlePageClicked(object sender, EventArgs e)
     {
-        await Navigation.PushAsync(new AddArticlePage(_Service));
+        await Navigation.PushAsync(new AddArticlePage(_httpClient));
     }
 
     private async void OnEditArticleClicked(object sender, EventArgs e)
     {
         if (sender is Button button && button.CommandParameter is ArticleDto article)
         {
-            await Navigation.PushAsync(new EditArticlePage(_Service, article.Id));
+            await Navigation.PushAsync(new EditArticlePage(_httpClient, article.Id));
         }
     }
 
     private async void OnDeleteArticleClicked(object sender, EventArgs e)
     {
-        if (sender is Button button && button.CommandParameter is ArticleDto article)
+        if (sender is Button btn && btn.CommandParameter is ArticleDto article)
         {
             bool confirm = await DisplayAlert(
                 "Törlés megerõsítése",
-                $"Biztosan törölni szeretnéd ezt az ujsagot? ({article.Title} {article.Content})",
+                $"Biztosan törlöd a(z) '{article.Title}' cikket?",
                 "Igen", "Mégse");
 
-            if (confirm)
+            if (!confirm)
+                return;
+
+            var response = await _httpClient.DeleteAsync($"delete/{article.Id}");
+
+            if (response.IsSuccessStatusCode)
             {
-                try
-                {
-                    await _Service.DeleteArticleAsync(article.Id);
-                    await DisplayAlert("Siker", "Az ujsag törölve lett.", "OK");
-                    await LoadArticlesAsync();
-                }
-                catch (Exception ex)
-                {
-                    await DisplayAlert("Hiba", $"Nem sikerült törölni az ujsagot: {ex.Message}", "OK");
-                }
+                await DisplayAlert("OK", "Törölve.", "OK");
+                await LoadArticlesAsync();
+            }
+            else
+            {
+                await DisplayAlert("Hiba", "Nem sikerült törölni!", "OK");
             }
         }
     }

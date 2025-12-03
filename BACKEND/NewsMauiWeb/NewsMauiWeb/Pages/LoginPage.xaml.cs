@@ -5,12 +5,14 @@ namespace NewsApp.Pages;
 public partial class LoginPage : ContentPage
 {
     private readonly HttpClient _httpClient;
+
     public LoginPage()
     {
         InitializeComponent();
+
         _httpClient = new HttpClient
         {
-            BaseAddress = new Uri("http://localhost:5038/") // Backend címed
+            BaseAddress = new Uri("http://localhost:5038/")
         };
     }
 
@@ -21,7 +23,8 @@ public partial class LoginPage : ContentPage
 
         if (string.IsNullOrWhiteSpace(email) || string.IsNullOrWhiteSpace(password))
         {
-            StatusLabel.Text = "Kérlek, tölts ki minden mez?t!";
+            StatusLabel.TextColor = Colors.Red;
+            StatusLabel.Text = "Kérlek, tölts ki minden mezõt!";
             return;
         }
 
@@ -29,23 +32,30 @@ public partial class LoginPage : ContentPage
 
         try
         {
-            var response = await _httpClient.PostAsJsonAsync("Account/login", loginRequest);
+            var response = await _httpClient.PostAsJsonAsync("Account/Login", loginRequest);
 
-            if (response.IsSuccessStatusCode)
-            {
-                var token = await response.Content.ReadAsStringAsync();
-                await SecureStorage.SetAsync("auth_token", token);
-
-                StatusLabel.TextColor = Colors.Green;
-                StatusLabel.Text = "Sikeres bejelentkezés!";
-
-                await Shell.Current.GoToAsync("//MainPage");
-            }
-            else
+            if (!response.IsSuccessStatusCode)
             {
                 StatusLabel.TextColor = Colors.Red;
                 StatusLabel.Text = "Hibás email vagy jelszó!";
+                return;
             }
+
+            var loginResult = await response.Content.ReadFromJsonAsync<LoginResponse>();
+
+            if (loginResult == null || string.IsNullOrEmpty(loginResult.Token))
+            {
+                StatusLabel.TextColor = Colors.Red;
+                StatusLabel.Text = "A token nem érkezett meg!";
+                return;
+            }
+
+            await SecureStorage.SetAsync("auth_token", loginResult.Token);
+
+            StatusLabel.TextColor = Colors.Green;
+            StatusLabel.Text = "Sikeres bejelentkezés!";
+
+            await Shell.Current.GoToAsync("//MainPage");
         }
         catch (Exception ex)
         {
@@ -59,4 +69,9 @@ public partial class LoginPage : ContentPage
     {
         await Shell.Current.GoToAsync("//RegisterPage");
     }
+}
+
+public class LoginResponse
+{
+    public string Token { get; set; }
 }
